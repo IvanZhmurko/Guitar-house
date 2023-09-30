@@ -13,7 +13,7 @@ export class ShowfullItem extends Component {
              <p>{this.props.item.desc}</p>
              <b>{this.props.item.price}$</b>
              <p
-                className="close-modal-item"
+                className="close-modal-window"
                 onClick={() => this.props.onShowItem(this.props.item)}
              >
                 X

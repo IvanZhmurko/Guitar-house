@@ -250,7 +250,7 @@ main .add-to-cart:hover,
     transform: scale(1.5) translateY(-5px);
 }
 
-.close-modal-item {
+.close-modal-window {
     position: absolute;
     font-weight: 600;
     right: 20px;
