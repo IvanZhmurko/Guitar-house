@@ -3,13 +3,14 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Items from "./components/Items";
 import Categories from "./components/Categories";
+import ShowfullItem from "./components/ShowfullItem";
 
 class App extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
          orders: [],
-         currentItems:[],
+         currentItems: [],
          items: [
             {
                id: 1,
@@ -21,7 +22,7 @@ class App extends React.Component {
             },
             {
                id: 2,
-               title: "Електро гітара",
+               title: "Електрогітара",
                img: "electro.jpg",
                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                category: "electro",
@@ -44,22 +45,42 @@ class App extends React.Component {
                price: "9.99",
             },
          ],
+         showFullItem: false,
+         fullItem: {}
       };
       this.state.currentItems=this.state.items
       this.addToOrder = this.addToOrder.bind(this);
       this.deleteOrder = this.deleteOrder.bind(this);
       this.chooseCategory = this.chooseCategory.bind(this);
+      this.onShowItem = this.onShowItem.bind(this);
    }
    render() {
       return (
          <div className="wrapper">
             <Header orders={this.state.orders} onDelete={this.deleteOrder} />
             <Categories chooseCategory={this.chooseCategory} />
-            <Items items={this.state.currentItems} onAdd={this.addToOrder} />
+            <Items
+               onShowItem={this.onShowItem}
+               items={this.state.currentItems}
+               onAdd={this.addToOrder}
+            />
+            {this.state.showFullItem && (
+               <ShowfullItem
+                  onAdd={this.addToOrder}
+                  onShowItem={this.onShowItem}
+                  item={this.state.fullItem}
+               />
+            )}
             <Footer />
          </div>
       );
    }
+
+   onShowItem(item) {
+      this.setState({fullItem: item})
+   this.setState({showFullItem: !this.state.showFullItem})
+}
+
 
    chooseCategory(category) {
       if (category === 'all') {
